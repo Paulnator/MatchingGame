@@ -15,6 +15,43 @@ namespace MatchingGame
         public Form1()
         {
             InitializeComponent();
+
+            AssignIconsToSquares();          
+        }
+        Random random = new Random();
+
+        List<string> icons = new List<string>()
+            {
+                "!","!","H","H","G","G","U","U",
+                "l","l","i","i","t","t","P","P",
+            };
+
+        void AssignIconsToSquares()
+        {
+            foreach (Control control in tableLayoutPanel1.Controls)
+            {
+                Label iconLabel = control as Label;
+                if (iconLabel != null)
+                {
+                    int randomNumber = random.Next(icons.Count);
+                    iconLabel.Text = icons[randomNumber];
+                    iconLabel.ForeColor = iconLabel.BackColor;
+                    icons.RemoveAt(randomNumber);
+                }
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            Label clickedLabel = sender as Label;
+
+            if(clickedLabel != null)
+            {
+                if (clickedLabel.ForeColor == Color.Black)
+                    return;
+
+                clickedLabel.ForeColor = Color.Black;
+            }
         }
     }
 }
